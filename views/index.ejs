@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+    <h1>Weather Forecast</h1>
+    <form action="/weather" method="get">
+        <input type="text" name="city" placeholder="Enter city name">
+        <button type="submit">Get Weather</button>
+    </form>
+    
+    <% if (weatherData) { %>
+        <h2>Weather for <%= weatherData.nearest_area[0].areaName[0].value %></h2>
+        <p>Region: <%= weatherData.nearest_area[0].region[0].value %></p>
+        <p>Country: <%= weatherData.nearest_area[0].country[0].value %></p>
+        <p>Current Temperature: <%= weatherData.current_condition[0].temp_C %>°C</p>
+        <p>Feels Like: <%= weatherData.current_condition[0].FeelsLikeC %>°C</p>
+        <p>Weather Description: <%= weatherData.current_condition[0].weatherDesc[0].value %></p>
+        <p>Wind Speed: <%= weatherData.current_condition[0].windspeedKmph %> km/h</p>
+        <p>Humidity: <%= weatherData.current_condition[0].humidity %>%</p>
+        <p>Visibility: <%= weatherData.current_condition[0].visibility %> km</p>
+        <p>UV Index: <%= weatherData.current_condition[0].uvIndex %></p>
+        
+        <h3>3-Day Forecast:</h3>
+        <% weatherData.weather.forEach(function(day) { %>
+            <h4><%= day.date %></h4>
+            <p>Max Temperature: <%= day.maxtempC %>°C</p>
+            <p>Min Temperature: <%= day.mintempC %>°C</p>
+            <p>Sunrise: <%= day.astronomy[0].sunrise %></p>
+            <p>Sunset: <%= day.astronomy[0].sunset %></p>
+            <p>Moonrise: <%= day.astronomy[0].moonrise %></p>
+            <p>Moonset: <%= day.astronomy[0].moonset %></p>
+        <% }); %>
+    <% } %>
+    
+    <% if (error) { %>
+        <p style="color: red;"><%= error %></p>
+    <% } %>
+</body>
+</html>

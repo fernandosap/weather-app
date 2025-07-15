@@ -5,4 +5,4 @@ applications:
       - nodejs_buildpack
     memory: 256M
     command: npm run start
-    random-route: false
+    random-route: true

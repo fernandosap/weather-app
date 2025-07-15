@@ -1,0 +1,8 @@
+applications:
+  - name: weather-app
+    path: .
+    buildpacks:
+      - nodejs_buildpack
+    memory: 256M
+    command: npm run start
+    random-route: false
